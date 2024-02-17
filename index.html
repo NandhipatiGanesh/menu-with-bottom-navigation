@@ -5,6 +5,18 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>List Hover Effect</title>
 <style>
+
+  a{
+    text-decoration: none;
+    cursor: pointer;
+    color: rgb(0, 0, 0);
+  }
+  .submenu a{
+    color: white;
+  }
+  .submenu .custom-li{
+    list-style: none;
+  }
 .custom-menu {
   display: flex;
   justify-content: center;
@@ -13,17 +25,17 @@
   bottom: 0;
 }
 
-ul {
+.custom-ul {
   display: flex;
   gap: 20px;
   list-style: none;
 }
 
-li {
+.custom-li {
   padding: 10px;
+  font-size: 18px;
 }
-
-li:hover {
+.custom-li:hover {
   background: black;
   color: white;
   border-radius:50px;
@@ -49,6 +61,7 @@ li:hover .submenu,
   to {
     transform: translateY(-40px);
     opacity: 1;
+    transition-delay: 0.5s;
   }
 }
 
@@ -60,53 +73,73 @@ li:hover .submenu,
   to {
     transform: translateY(0);
     opacity: 1;
+    transition-delay: 0.5s;
   }
 }
 
 .submenu {
   position: absolute;
-  bottom: 100%; /* Initially position above the menu */
-  width: 300%;
+  bottom: 100%;
+  left: 0; /* Initially position above the menu */
+  width: 400%;
   height: auto;
  background:black;
  color:white;
   padding:30px;
+ margin-bottom: 10px;
   border-radius:32px;
  /* Example padding */
   box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.2); /* Example box shadow */
   display: none; /* Initially hidden */
   animation-name: slideIn;
   animation-name:slideOut;
-  animation-duration: 0.5s;
+  animation: slideIn 0.5s, slideOut 0.5s; /* Combined animations */
   
 }
 
-.submenu li:hover {
+.submenu .custom-li:hover {
   background:none;
   color:white;
 }
 
-li {
+.custom-li {
   position: relative;
   z-index: 2;
 }
+/* Added delay for submenu disappearance */
+.custom-li:hover .submenu.closed {
+  animation-name: none;
+  display: block;
+  animation: disappear-delay 0.5s forwards;
+}
+
+@keyframes disappear-delay {
+  99.9% {
+    display: block;
+  }
+  100% {
+    display: none;
+  }
+}
+
+
 </style>
 </head>
 <body>
 <div class="custom-menu">
-  <ul>
-   <a href="#"> <li>Home</li></a>
-    <li>
+  <ul class="custom-ul">
+   <a href="#"> <li class="custom-li">Home</li></a>
+    <li class="custom-li">
       services
       <ul class="submenu">
-        <a href="#"><li>Website Design</li></a>
-       <a href="#"> <li>Landing Page Design</li></a>
-        <a href="#"><li>Ecommerce site Design</li></a>
+        <a href="#"><li class="custom-li">Website Design</li></a>
+       <a href="#"> <li class="custom-li" >Landing Page Design</li></a>
+        <a href="#"><li class="custom-li">Ecommerce site Design</li></a>
       </ul>
     </li>
-    <a href="#"><li>Pricing</li></a>
-    <a href="#"><li>About</li></a>
-    <a href="#"><li>Contact</li></a>
+    <a href="#"><li class="custom-li">Pricing</li></a>
+    <a href="#"><li class="custom-li">About</li></a>
+    <a href="#"><li class="custom-li">Contact</li></a>
   </ul>
 </div>
 </body>
